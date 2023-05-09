@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function MainSection() {
   return (
-    <div className="relative -mt-1 flex h-[calc(100vh-11rem)] min-h-[22rem] flex-col items-center justify-center overflow-hidden border-b-2 bg-black">
+    <div className="relative -mt-1 flex h-[calc(100vh-11rem)] min-h-[22rem] flex-col items-center justify-center overflow-hidden  bg-black">
       <Image
         src="/images/sky2.jpg"
         alt="background"
@@ -10,7 +10,7 @@ export default function MainSection() {
         sizes="(max-width: 768px) 66vw, (max-width: 1200px) 50vw, 33vw"
         style={{
           objectFit: "cover",
-          opacity: 0.19,
+          opacity: 0.3,
         }}
         priority
         unoptimized
@@ -31,7 +31,7 @@ export default function MainSection() {
           <div className="rounded-md shadow">
             <a
               href="#"
-              className="text-md mb-2 mr-2 flex w-full items-center justify-center rounded-xl border border-indigo-700 px-5 py-2.5 text-center font-semibold text-indigo-700 transition duration-300 hover:bg-indigo-800 hover:text-white  md:px-10 md:py-4 md:text-xl"
+              className="mb-2 mr-2 flex w-full items-center justify-center rounded-xl border border-indigo-800 bg-indigo-700  px-5 py-2.5 text-center text-base font-semibold tracking-wide text-gray-300 transition duration-300 hover:border-indigo-950 hover:bg-indigo-900 hover:text-gray-100 md:px-10 md:py-4 md:text-xl"
             >
               GitHub
             </a>
