@@ -2,10 +2,10 @@
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseOutline } from "react-icons/io5";
 import { AiFillCaretDown } from "react-icons/ai";
-
+import LanguageSwitcher from "./LanguageSwitcher";
 import Link from "next/link";
 import { useState } from "react";
-
+import getDictionary from "@/utils/getDictionary";
 let logo = (
   <svg
     className="block h-8 w-auto cursor-pointer "
@@ -21,27 +21,37 @@ let logo = (
   </svg>
 );
 const navigation = [
-  { name: "Home", href: "#", current: true },
-  { name: "Next", href: "#", current: false },
+  { name: "Home", href: "/", current: true },
+  { name: "Next", href: "https://nextjs.org/docs", current: false },
 
-  { name: "Tailwind", href: "#", current: false },
   {
-    name: "Projetos",
-    href: "#",
+    name: "Tailwind",
+    href: "https://tailwindcss.com/docs/installation",
+    isExternal: true,
+    current: false,
+  },
+
+  {
+    name: "Github",
+    href: "/",
     current: false,
     subMenu: [
-      { name: "Project 1", href: "#", current: false },
-      { name: "Project 2", href: "#", current: false },
+      {
+        name: "Timer",
+        href: "https://github.com/MacielG1/Interval_Timer",
+        isExternal: true,
+        current: false,
+      },
     ],
   },
 ];
 
+// function that combines classes without needing template literals
 function classNames(...classes) {
-  // function that combines classes without needing template literals
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example() {
+export default function Navbar() {
   let [isOpen, setIsOpen] = useState(false);
   let [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -53,7 +63,7 @@ export default function Example() {
     setIsDropdownOpen((prev) => !prev);
     console.log("drop");
   }
-  //
+
   return (
     <nav className="sticky top-0 z-50 bg-gradient-to-r from-slate-950 to-sky-900">
       <div className="relative mx-auto flex h-14 max-w-7xl items-center justify-between px-2 sm:px-6 lg:px-8">
@@ -61,7 +71,7 @@ export default function Example() {
         <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <div
             onClick={toggleMenu}
-            className=" mx-1 inline-flex items-center justify-center rounded-md p-2 text-gray-300 hover:bg-sky-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-800"
+            className="mx-1 inline-flex items-center justify-center rounded-md p-2 text-gray-300 hover:bg-sky-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-800"
           >
             <span className="sr-only">isOpen main menu</span>
             {isOpen ? (
@@ -79,27 +89,29 @@ export default function Example() {
               Logo
             </span>
           </Link>
+
           {/* Menu Items */}
           <div className="hidden sm:ml-6 sm:block">
-            <div className="flex space-x-4">
+            <div className="flex items-center space-x-4">
               {navigation.map((item) => (
                 <div
                   key={item.name}
                   className={classNames(
                     item.current
                       ? "bg-sky-900 text-white"
-                      : "text-zinc-200   hover:bg-sky-800 hover:text-white",
+                      : "text-zinc-200 hover:bg-sky-800 hover:text-white",
                     `${
                       item.subMenu
                         ? "group relative  hover:rounded-b-none "
                         : ""
-                    } rounded-md  px-2 py-2 text-sm font-medium tracking-wide focus:outline-none focus:ring-2 focus:ring-zinc-200 `
+                    } rounded-md text-sm font-medium tracking-wide focus:outline-none focus:ring-2 focus:ring-zinc-200 `
                   )}
                 >
                   <Link
                     href={item.href}
-                    className="flex items-center justify-between"
+                    className="flex items-center justify-between px-2 py-2"
                     aria-current={item.current ? "page" : undefined}
+                    target={item.isExternal ? "_blank" : ""}
                   >
                     <span>{item.name}</span>
                     {item.subMenu && (
@@ -111,7 +123,8 @@ export default function Example() {
                       {item.subMenu.map((subItem) => (
                         <Link
                           key={subItem.name}
-                          href="#"
+                          href={subItem.href}
+                          target={subItem.isExternal ? "_blank" : ""}
                           className="block w-full rounded-none px-4 py-2 text-sm text-white  first:rounded-tr-md  hover:bg-sky-900 last:hover:rounded-b-md "
                         >
                           {subItem.name}
@@ -121,6 +134,7 @@ export default function Example() {
                   )}
                 </div>
               ))}
+              <LanguageSwitcher />
             </div>
           </div>
         </div>

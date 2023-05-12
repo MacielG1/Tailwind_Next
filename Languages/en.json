@@ -1,0 +1,43 @@
+{
+
+
+  "Navbar":{
+      "Home": "Home",
+      "Projects": "Projects"
+    },
+  
+    "MainSection": {
+      "h1": {
+        "span1": "Website created with",
+        "span2": "Next JS & Tailwind"
+      },
+      "p": "This website is a personal project created with the goal of showcasing the use of Next.js and Tailwind CSS, which are two of the most used frameworks in recent Web Development."
+    },
+    "Features" : {
+        "h2" : "Features",
+        "P": "Below are some details about the frameworks used in this project.",
+        "nextDescription": "Next.js is a framework that makes it easy to create Web Apps, with features like SSR and SSG, improving the website's performance.",
+        "TailwindDescription": "Tailwind is a CSS framework used to style HTML elements, containing a lot of utility classes to enhance the site's design.",
+        "reactDescription":  "React is a JavaScript library used to create UI components, that can be reused in different parts of the app."
+    } ,
+     "BlogSection": {
+      "h3": "Stay updated" ,
+      "description": "Follow the official framework blogs to stay updated on the latest news",
+      "tailwind" : {
+        "text" :  "In the official Tailwind blog, you can find the tailwind's latest releases, as well as tips on how to use it.",
+        "btnText": "Visit"
+      },
+      "next": {
+        "text": "The Next.js blog is the place for you to stay updated on the framework's news and futures updates.",
+        "btnText": "Visit"
+      }
+     },
+     "Footer": {
+      "text": " All rights reserved."
+     }
+     
+
+
+
+  }
+  
