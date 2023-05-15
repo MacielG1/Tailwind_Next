@@ -2,10 +2,11 @@
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseOutline } from "react-icons/io5";
 import { AiFillCaretDown } from "react-icons/ai";
+import { AiFillCaretRight } from "react-icons/ai";
 import LanguageSwitcher from "./LanguageSwitcher";
 import Link from "next/link";
 import { useState } from "react";
-import getDictionary from "@/utils/getDictionary";
+
 let logo = (
   <svg
     className="block h-8 w-auto cursor-pointer "
@@ -21,26 +22,21 @@ let logo = (
   </svg>
 );
 const navigation = [
-  { name: "Home", href: "/", current: true },
-  { name: "Next", href: "https://nextjs.org/docs", current: false },
+  { name: "Home", href: "/" },
+  { name: "Next", href: "https://nextjs.org/docs" },
 
   {
     name: "Tailwind",
     href: "https://tailwindcss.com/docs/installation",
-    isExternal: true,
-    current: false,
   },
 
   {
     name: "Github",
     href: "/",
-    current: false,
     subMenu: [
       {
         name: "Timer",
         href: "https://github.com/MacielG1/Interval_Timer",
-        isExternal: true,
-        current: false,
       },
     ],
   },
@@ -93,48 +89,48 @@ export default function Navbar() {
           {/* Menu Items */}
           <div className="hidden sm:ml-6 sm:block">
             <div className="flex items-center space-x-4">
-              {navigation.map((item) => (
-                <div
-                  key={item.name}
-                  className={classNames(
-                    item.current
-                      ? "bg-sky-900 text-white"
-                      : "text-zinc-200 hover:bg-sky-800 hover:text-white",
-                    `${
-                      item.subMenu
-                        ? "group relative  hover:rounded-b-none "
-                        : ""
-                    } rounded-md text-sm font-medium tracking-wide focus:outline-none focus:ring-2 focus:ring-zinc-200 `
-                  )}
-                >
-                  <Link
-                    href={item.href}
-                    className="flex items-center justify-between px-2 py-2"
-                    aria-current={item.current ? "page" : undefined}
-                    target={item.isExternal ? "_blank" : ""}
-                  >
-                    <span>{item.name}</span>
-                    {item.subMenu && (
-                      <AiFillCaretDown className="pl-1 text-sm text-white transition duration-200 group-hover:text-sky-800" />
+              {navigation.map((item) => {
+                return (
+                  <div
+                    key={item.name}
+                    className={classNames(
+                      `${
+                        item.subMenu
+                          ? "group relative  hover:rounded-b-none "
+                          : ""
+                      }  flex justify-center rounded-lg  text-sm font-medium tracking-wide text-zinc-200   hover:bg-sky-800 hover:text-white focus:outline-none `
                     )}
-                  </Link>
-                  {item.subMenu && (
-                    <div className="absolute left-0 top-full z-10 hidden w-32 transform whitespace-nowrap rounded-md rounded-tl-none   bg-sky-800 shadow-lg  transition duration-300 group-hover:block">
-                      {item.subMenu.map((subItem) => (
-                        <Link
-                          key={subItem.name}
-                          href={subItem.href}
-                          target={subItem.isExternal ? "_blank" : ""}
-                          className="block w-full rounded-none px-4 py-2 text-sm text-white  first:rounded-tr-md  hover:bg-sky-900 last:hover:rounded-b-md "
-                        >
-                          {subItem.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-              <LanguageSwitcher />
+                  >
+                    <Link
+                      href={item.href}
+                      className="flex  w-[5.5rem] items-center justify-center rounded-lg px-2 py-2 ring-1 ring-inset ring-sky-800"
+                      target={item.href.startsWith("http") ? "_blank" : ""}
+                    >
+                      <span>{item.name}</span>
+                      {item.subMenu && (
+                        <AiFillCaretDown className="pl-1 text-sm text-white transition duration-200 group-hover:text-sky-800 " />
+                      )}
+                    </Link>
+                    {item.subMenu && (
+                      <div className="absolute left-0 top-full z-10 hidden w-32 transform whitespace-nowrap rounded-md rounded-tl-none bg-sky-800 shadow-lg   group-hover:block">
+                        {item.subMenu.map((subItem) => (
+                          <Link
+                            key={subItem.name}
+                            href={subItem.href}
+                            target={
+                              subItem.href.startsWith("http") ? "_blank" : ""
+                            }
+                            className="block w-full rounded-none px-4 py-2 text-sm text-white  first:rounded-tr-md  hover:bg-sky-900 last:hover:rounded-b-md "
+                          >
+                            {subItem.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+              <LanguageSwitcher size={16} />
             </div>
           </div>
         </div>
@@ -148,8 +144,9 @@ export default function Navbar() {
               key={item.name}
               className={classNames(
                 `${
-                  item.subMenu ? "group relative" : ""
-                } rounded-md px-2  py-2 text-sm  font-medium tracking-wide text-white focus:outline-none focus:ring-2 focus:ring-zinc-200`
+                  item.subMenu ? "group relative  bg-sky-800" : ""
+                } "block text-md flex flex-col items-center rounded-md  text-center font-medium tracking-wide  text-white
+               focus:outline-none  `
               )}
             >
               <Link
@@ -162,21 +159,25 @@ export default function Navbar() {
                   }
                 }}
                 href={item.href}
-                className="flex  items-center  gap-1 "
+                className="flex  w-full  items-center justify-center gap-1 rounded-md bg-sky-800 px-2  py-2 hover:bg-sky-900"
                 aria-current={item.current ? "page" : undefined}
               >
                 <span>{item.name}</span>
-                {item.subMenu && (
-                  <AiFillCaretDown className="pl-1 text-sm text-white transition duration-200 " />
-                )}
+                {item.subMenu ? (
+                  isDropdownOpen ? (
+                    <AiFillCaretDown className=" pl-1 text-sm text-white transition duration-200 " />
+                  ) : (
+                    <AiFillCaretRight className=" pl-1 text-sm text-white transition duration-200 " />
+                  )
+                ) : null}
               </Link>
               {item.subMenu && isDropdownOpen && (
-                <div className="relative left-0 top-full z-10 mt-2 w-full transform whitespace-nowrap rounded-md  bg-gradient-to-r from-sky-900  to-sky-600">
+                <div className="relative left-0 top-full z-10 w-full transform whitespace-nowrap rounded-md bg-sky-800">
                   {item.subMenu.map((subItem) => (
                     <Link
                       key={subItem.name}
                       href="#"
-                      className="block w-full rounded-md px-4 py-2 pl-5 text-sm text-white hover:bg-sky-900 hover:bg-opacity-70"
+                      className="block w-full rounded-md px-4 py-2 pl-8 text-sm text-white hover:bg-sky-900 "
                       onClick={(e) => {
                         e.stopPropagation();
                         toggleMenu();
@@ -189,6 +190,9 @@ export default function Navbar() {
               )}
             </div>
           ))}
+          <div className="py-2 pl-5">
+            <LanguageSwitcher size={23} />
+          </div>
         </div>
       ) : null}
     </nav>
