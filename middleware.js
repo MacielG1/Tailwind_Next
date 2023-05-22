@@ -9,7 +9,6 @@ function getUserLocation(request) {
 
   let userLangs = negotiator.languages(languageSupported);
 
-  userLangs = "en";
   return match(userLangs, languageSupported, "en"); // matches the user languages with the supported languages and if none are matched, use en-US
 }
 

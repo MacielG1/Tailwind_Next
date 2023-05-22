@@ -17,9 +17,8 @@ export async function generateStaticParams() {
 }
 
 export default function RootLayout({ children, params }) {
-  let lang = params.lang;
   return (
-    <html lang={lang}>
+    <html lang={params.lang}>
       <body className={`${font.className} `}>
         <Navbar />
         <main>{children}</main>

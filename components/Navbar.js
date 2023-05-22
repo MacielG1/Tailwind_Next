@@ -5,6 +5,7 @@ import { AiFillCaretDown } from "react-icons/ai";
 import { AiFillCaretRight } from "react-icons/ai";
 import LanguageSwitcher from "./LanguageSwitcher";
 import Link from "next/link";
+import LinkCustom from "./LinkCustom";
 import { useState } from "react";
 
 let logo = (
@@ -79,12 +80,12 @@ export default function Navbar() {
         </div>
         <div className="flex flex-1 items-center justify-end min-[320px]:justify-around sm:items-stretch ">
           {/* Logo */}
-          <Link className="flex flex-shrink-0 items-center" href="/">
+          <LinkCustom className="flex flex-shrink-0 items-center" href={`/`}>
             {logo}
             <span className="mx-3 hidden cursor-pointer text-2xl font-semibold tracking-tight text-zinc-100 hover:text-white min-[320px]:block">
               Logo
             </span>
-          </Link>
+          </LinkCustom>
 
           {/* Menu Items */}
           <div className="hidden sm:ml-6 sm:block">
@@ -101,7 +102,7 @@ export default function Navbar() {
                       }  flex justify-center rounded-lg  text-sm font-medium tracking-wide text-zinc-200   hover:bg-sky-800 hover:text-white focus:outline-none `
                     )}
                   >
-                    <Link
+                    <LinkCustom
                       href={item.href}
                       className="flex  w-[5.5rem] items-center justify-center rounded-lg px-2 py-2 ring-1 ring-inset ring-sky-800"
                       target={item.href.startsWith("http") ? "_blank" : ""}
@@ -110,11 +111,11 @@ export default function Navbar() {
                       {item.subMenu && (
                         <AiFillCaretDown className="pl-1 text-sm text-white transition duration-200 group-hover:text-sky-800 " />
                       )}
-                    </Link>
+                    </LinkCustom>
                     {item.subMenu && (
                       <div className="absolute left-0 top-full z-10 hidden w-32 transform whitespace-nowrap rounded-md rounded-tl-none bg-sky-800 shadow-lg   group-hover:block">
                         {item.subMenu.map((subItem) => (
-                          <Link
+                          <LinkCustom
                             key={subItem.name}
                             href={subItem.href}
                             target={
@@ -123,7 +124,7 @@ export default function Navbar() {
                             className="block w-full rounded-none px-4 py-2 text-sm text-white  first:rounded-tr-md  hover:bg-sky-900 last:hover:rounded-b-md "
                           >
                             {subItem.name}
-                          </Link>
+                          </LinkCustom>
                         ))}
                       </div>
                     )}
@@ -149,7 +150,7 @@ export default function Navbar() {
                focus:outline-none  `
               )}
             >
-              <Link
+              <LinkCustom
                 onClick={(e) => {
                   e.stopPropagation();
                   if (item.subMenu) {
@@ -170,11 +171,11 @@ export default function Navbar() {
                     <AiFillCaretRight className=" pl-1 text-sm text-white transition duration-200 " />
                   )
                 ) : null}
-              </Link>
+              </LinkCustom>
               {item.subMenu && isDropdownOpen && (
                 <div className="relative left-0 top-full z-10 w-full transform whitespace-nowrap rounded-md bg-sky-800">
                   {item.subMenu.map((subItem) => (
-                    <Link
+                    <LinkCustom
                       key={subItem.name}
                       href="#"
                       className="block w-full rounded-md px-4 py-2 pl-8 text-sm text-white hover:bg-sky-900 "
@@ -184,7 +185,7 @@ export default function Navbar() {
                       }}
                     >
                       {subItem.name}
-                    </Link>
+                    </LinkCustom>
                   ))}
                 </div>
               )}

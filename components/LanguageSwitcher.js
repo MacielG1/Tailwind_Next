@@ -1,4 +1,5 @@
 import { usePathname } from "next/navigation";
+
 import Link from "next/link";
 import Image from "next/image";
 import brSVG from "../public/images/br.svg";
@@ -19,19 +20,16 @@ export default function LanguageSwitcher({ size }) {
 
   return (
     <p>
-      {
-        <Link
-          href={redirectedPathName(lang === "pt" ? "en" : "pt")}
-          shallow={true}
-        >
-          <Image
-            src={lang === "pt" ? ukSVG : brSVG}
-            alt={lang}
-            width={size}
-            height={size}
-          />
-        </Link>
-      }
+      <Link
+        href={redirectedPathName(lang === "pt" ? "en" : "pt")}
+        shallow={true}
+      >
+        <Image
+          src={lang === "pt" ? ukSVG : brSVG}
+          alt={lang}
+          style={{ height: size, width: size }}
+        />
+      </Link>
     </p>
   );
 }
