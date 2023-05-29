@@ -28,6 +28,7 @@ export default function LanguageSwitcher({ size }) {
           src={lang === "pt" ? ukSVG : brSVG}
           alt={lang}
           style={{ height: size, width: size }}
+          unoptimized
         />
       </Link>
     </p>
