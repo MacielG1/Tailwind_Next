@@ -1,0 +1,18 @@
+<svg viewBox="15 15 115 115" xmlns="http://www.w3.org/2000/svg">
+  <path
+    fill="#ff0055"
+    d="M 57 20 L 87 70 C 93.844 70.12 45.449 70.324 27 70 L 57 20 Z"
+  />
+  <polygon
+    points="67,35 102,95 32,95"
+    stroke="#000"
+    stroke-width="3"
+    fill="#ff0055"
+  />
+  <polygon
+    points="77,50 117,120 37,120"
+    fill="#5b00b5"
+    stroke="#000"
+    stroke-width="3"
+  />
+</svg>

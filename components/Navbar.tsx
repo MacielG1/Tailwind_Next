@@ -1,56 +1,57 @@
-"use client";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { IoCloseOutline } from "react-icons/io5";
-import { AiFillCaretDown } from "react-icons/ai";
-import { AiFillCaretRight } from "react-icons/ai";
-import LanguageSwitcher from "./LanguageSwitcher";
-import Link from "next/link";
-import LinkCustom from "./LinkCustom";
-import { useState } from "react";
+'use client';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import { IoCloseOutline } from 'react-icons/io5';
+import { AiFillCaretDown } from 'react-icons/ai';
+import { AiFillCaretRight } from 'react-icons/ai';
+import LanguageSwitcher from './LanguageSwitcher';
+import Link from 'next/link';
+import LinkCustom from './LinkCustom';
+import { useState } from 'react';
+import { Icons } from '@/assets/icons';
+import { Dictionary } from '@/utils/getDictionary';
+import { cn } from '@/lib/utils';
 
-let logo = (
-  <svg
-    className="block h-8 w-auto cursor-pointer "
-    xmlns="http://www.w3.org/2000/svg"
-    width="28"
-    height="28"
-    viewBox="0 0 15 15"
-  >
-    {/* prettier-ignore */}
-    <rect x="0.5" y="2.5" width="14" height="10" rx="1" fill="none" stroke="#fff"/>
-    <line x1="4" y1="14.5" x2="11" y2="14.5" stroke="#fff" />
-    <line x1="7.5" y1="12" x2="7.5" y2="14.5" stroke="#fff" />
-  </svg>
-);
-const navigation = [
-  { name: "Home", href: "/" },
-  { name: "Next", href: "https://nextjs.org/docs" },
-
-  {
-    name: "Tailwind",
-    href: "https://tailwindcss.com/docs/installation",
-  },
-
-  {
-    name: "Github",
-    href: "/",
-    subMenu: [
-      {
-        name: "Timer",
-        href: "https://github.com/MacielG1/Interval_Timer",
-      },
-    ],
-  },
-];
-
-// function that combines classes without needing template literals
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
-export default function Navbar() {
+export default function Navbar({ dictionary }: { dictionary: Dictionary }) {
   let [isOpen, setIsOpen] = useState(false);
   let [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const navigation: Array<{
+    name: string;
+    href: string;
+    subMenu?: Array<{
+      name: string;
+      href: string;
+      logo: JSX.Element;
+    }>;
+    current?: boolean;
+  }> = [
+    { name: dictionary.Navbar.Home, href: '/' },
+    {
+      name: dictionary.Navbar.Examples,
+      href: '/examples/users',
+    },
+    {
+      name: dictionary.Navbar.Projects,
+      href: '/',
+      subMenu: [
+        {
+          name: 'KBoards',
+          href: 'https://kboards.vercel.app/',
+          logo: <Icons.kboardsLogo className="h-4 w-4" />,
+        },
+        {
+          name: 'YT Playlist Manager',
+          href: 'https://ytmanager.vercel.app',
+          logo: <Icons.ytPlaylistLogo className="h-4 w-4" />,
+        },
+        {
+          name: 'Interval Timer',
+          href: 'https://macielg1.github.io/Timer_Interval/',
+          logo: <Icons.timerAppLogo className="h-4 w-4" />,
+        },
+      ],
+    },
+  ];
 
   function toggleMenu() {
     setIsOpen((prev) => !prev);
@@ -58,7 +59,7 @@ export default function Navbar() {
 
   function toggleDropdown() {
     setIsDropdownOpen((prev) => !prev);
-    console.log("drop");
+    console.log('drop');
   }
 
   return (
@@ -71,20 +72,14 @@ export default function Navbar() {
             className="mx-1 inline-flex items-center justify-center rounded-md p-2 text-gray-300 hover:bg-sky-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-800"
           >
             <span className="sr-only">isOpen main menu</span>
-            {isOpen ? (
-              <IoCloseOutline className="block h-6 w-6 " aria-hidden="true" />
-            ) : (
-              <GiHamburgerMenu className="block h-6 w-6" aria-hidden="true" />
-            )}
+            {isOpen ? <IoCloseOutline className="block h-6 w-6 " aria-hidden="true" /> : <GiHamburgerMenu className="block h-6 w-6" aria-hidden="true" />}
           </div>
         </div>
-        <div className="flex flex-1 items-center justify-end min-[320px]:justify-around sm:items-stretch ">
+        <div className="flex flex-1 items-center justify-end min-[320px]:justify-around sm:items-stretch max-w-6xl">
           {/* Logo */}
-          <LinkCustom className="flex flex-shrink-0 items-center" href={`/`}>
-            {logo}
-            <span className="mx-3 hidden cursor-pointer text-2xl font-semibold tracking-tight text-zinc-100 hover:text-white min-[320px]:block">
-              Logo
-            </span>
+          <LinkCustom className="flex flex-shrink-0 items-center" href="/">
+            <Icons.logo className="size-8 text-blue-500" />
+            {/* <span className="mx-3 hidden cursor-pointer text-2xl  tracking-tight text-zinc-100 hover:text-white min-[320px]:block">Next Tailwind</span> */}
           </LinkCustom>
 
           {/* Menu Items */}
@@ -94,35 +89,30 @@ export default function Navbar() {
                 return (
                   <div
                     key={item.name}
-                    className={classNames(
+                    className={cn(
                       `${
-                        item.subMenu
-                          ? "group relative  hover:rounded-b-none "
-                          : ""
-                      }  flex justify-center rounded-lg  text-sm font-medium tracking-wide text-zinc-200   hover:bg-sky-800 hover:text-white focus:outline-none `
+                        item.subMenu ? 'group relative  hover:rounded-b-none ' : ''
+                      }  flex justify-center rounded-lg  text-sm font-medium tracking-wide text-zinc-200   hover:bg-sky-800 hover:text-white focus:outline-none `,
                     )}
                   >
                     <LinkCustom
                       href={item.href}
-                      className="flex  w-[5.5rem] items-center justify-center rounded-lg px-2 py-2 ring-1 ring-inset ring-sky-800"
-                      target={item.href.startsWith("http") ? "_blank" : ""}
+                      className="flex w-[5.5rem] items-center justify-center rounded-lg px-2 py-2 ring-1 ring-inset ring-sky-800"
+                      target={item.href.startsWith('http') ? '_blank' : ''}
                     >
                       <span>{item.name}</span>
-                      {item.subMenu && (
-                        <AiFillCaretDown className="pl-1 text-sm text-white transition duration-200 group-hover:text-sky-800 " />
-                      )}
+                      {item.subMenu && <AiFillCaretDown className="pl-1 text-sm text-white transition duration-200 group-hover:text-sky-800 " />}
                     </LinkCustom>
                     {item.subMenu && (
-                      <div className="absolute left-0 top-full z-10 hidden w-32 transform whitespace-nowrap rounded-md rounded-tl-none bg-sky-800 shadow-lg   group-hover:block">
+                      <div className="absolute left-0 top-full z-10 hidden w-48 transform whitespace-nowrap rounded-md rounded-tl-none bg-sky-800 shadow-lg   group-hover:block">
                         {item.subMenu.map((subItem) => (
                           <LinkCustom
                             key={subItem.name}
                             href={subItem.href}
-                            target={
-                              subItem.href.startsWith("http") ? "_blank" : ""
-                            }
-                            className="block w-full rounded-none px-4 py-2 text-sm text-white  first:rounded-tr-md  hover:bg-sky-900 last:hover:rounded-b-md "
+                            target={subItem.href.startsWith('http') ? '_blank' : ''}
+                            className=" flex w-full items-center gap-2 rounded-none px-4 py-2 text-sm text-white  first:rounded-tr-md  hover:bg-sky-900 last:hover:rounded-b-md "
                           >
+                            <span>{subItem.logo}</span>
                             {subItem.name}
                           </LinkCustom>
                         ))}
@@ -143,11 +133,11 @@ export default function Navbar() {
           {navigation.map((item) => (
             <div
               key={item.name}
-              className={classNames(
+              className={cn(
                 `${
-                  item.subMenu ? "group relative  bg-sky-800" : ""
+                  item.subMenu ? 'group relative  bg-sky-800' : ''
                 } "block text-md flex flex-col items-center rounded-md  text-center font-medium tracking-wide  text-white
-               focus:outline-none  `
+               focus:outline-none  `,
               )}
             >
               <LinkCustom
@@ -161,7 +151,7 @@ export default function Navbar() {
                 }}
                 href={item.href}
                 className="flex  w-full  items-center justify-center gap-1 rounded-md bg-sky-800 px-2  py-2 hover:bg-sky-900"
-                aria-current={item.current ? "page" : undefined}
+                aria-current={item.current ? 'page' : undefined}
               >
                 <span>{item.name}</span>
                 {item.subMenu ? (

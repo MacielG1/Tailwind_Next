@@ -3,6 +3,7 @@
 
   "Navbar":{
       "Home": "Home",
+      "Examples": "Examples",
       "Projects": "Projects"
     },
   
@@ -11,7 +12,7 @@
         "span1": "Website created with",
         "span2": "Next JS & Tailwind"
       },
-      "p": "This website is a personal project created with the goal of showcasing the use of Next.js and Tailwind CSS, which are two of the most used frameworks in recent Web Development."
+      "P": "This website is a personal project created with the goal of showcasing the use of Next.js and Tailwind CSS, which are two of the most used frameworks in recent Web Development."
     },
     "Features" : {
         "h2" : "Features",
@@ -34,7 +35,12 @@
      },
      "Footer": {
       "text": " All rights reserved."
+     },
+     "Examples": {
+      "title": "Example of Fetching Server Side Data in Next JS"
      }
+    
+
      
 
 

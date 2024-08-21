@@ -1,6 +1,7 @@
 {
   "Navbar": {
     "Home": "Início",
+    "Examples": "Exemplos",
     "Projects": "Projetos"
   },
   "MainSection": {
@@ -8,11 +9,11 @@
       "span1": "Website criado com",
       "span2": "Next JS & Tailwind"
     },
-    "p": "Esse site é um projeto pessoal criado com o objetivo de demonstrar o uso de Next.js e Tailwind CSS, que são duas das tecnologias mais usadas recentemente em Web Development."
+    "P": "Esse site é um projeto pessoal criado com o objetivo de demonstrar o uso de Next.js e Tailwind CSS, que são duas das tecnologias mais usadas recentemente em Web Development."
   },
   "Features": {
     "h2": "Tecnologias",
-    "P": "Abaixo está a Descrição das tecnologias utilizadas",
+    "P": "Abaixo está a descrição das tecnologias utilizadas",
     "nextDescription": "Next.js é um framework de React que facilita a criação de aplicações Web, com suporte a SSR e SSG que melhoram a performance do site.",
     "TailwindDescription": "Tailwind CSS é um framework CSS que é usado para criar estilização de sites, aprimorando a aparência e a responsividade.",
     "reactDescription": "React é uma library de JavaScript usada para criar componentes de UI, que podem ser reutilizados em diferentes partes do site."
@@ -22,14 +23,17 @@
     "description": "Siga esses blogs oficiais para continuar acompanhando as novidades e atualizações dos frameworks",
     "tailwind": {
       "text": "No blog oficial do Tailwind é encontrado as inovações e updates do framework, além de dicas e sujestões de como usar.",
-      "btnText": "Checkar"
+      "btnText": "Visitar"
     },
     "next": {
       "text": " O Next JS blog é o lugar para se manter atualizado sobre as novidades do framework além de futuras updates e novas funcionalidades.",
-      "btnText": "Checkar"
+      "btnText": "Visitar"
     }
   },
   "Footer": {
     "text": "Todos os direitos reservados"
+  },
+  "Examples": {
+    "title": "Exemplo de Busca de Dados no Servidor com Next JS"
   }
 }
