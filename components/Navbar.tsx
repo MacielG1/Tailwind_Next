@@ -21,7 +21,7 @@ export default function Navbar({ dictionary }: { dictionary: Dictionary }) {
     subMenu?: Array<{
       name: string;
       href: string;
-      logo: JSX.Element;
+      logo: React.ReactNode;
     }>;
     current?: boolean;
   }> = [

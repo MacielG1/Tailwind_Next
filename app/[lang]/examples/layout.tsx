@@ -6,13 +6,22 @@ export const metadata: Metadata = {
   title: 'Examples',
 };
 
-export default async function RootLayout({ children, params }: { children: React.ReactNode; params: { lang: string } }) {
-  const dictionary = await getDictionary(params?.lang);
+export default async function RootLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  const dictionary = await getDictionary(lang);
 
   return (
     <div className="flex w-full flex-col items-center justify-center">
       <div className="container">
-        <h2 className="py-5 text-center text-3xl font-semibold tracking-wider text-neutral-800 dark:text-neutral-400">{dictionary.Examples.title}</h2>
+        <h2 className="py-5 text-center text-3xl font-semibold tracking-wider text-neutral-800 dark:text-neutral-400">
+          {dictionary.Examples.title}
+        </h2>
       </div>
       <ExamplesMenu />
       {children}
